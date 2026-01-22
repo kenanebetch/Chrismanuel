@@ -32,6 +32,25 @@ app.post('/', (req, res) => {
 });
 
 // Start the server
-app.listen(port, () => {
-  console.log(`\nListening on port ${port}\n`);
+app.listen// 1. Route pour la vérification de Meta (GET)
+app.get('/webhook', (req, res) => {
+    // Cette partie répond à Meta pour dire "Oui, c'est bien mon serveur"
+    const mode = req.query['hub.mode'];
+    const token = req.query['hub.verify_token'];
+    const challenge = req.query['hub.challenge'];
+
+    if (mode === 'subscribe' && token === 'VOTRE_TOKEN_SECRET') {
+        console.log("Vérification réussie !");
+        res.status(200).send(challenge);
+    } else {
+        res.sendStatus(403);
+    }
 });
+
+// 2. Route pour recevoir les messages (POST)
+// C'est ici que vous traiterez les futurs messages de vos projets (ex: Compta-Vite)
+app.post('/webhook', (req, res) => {
+    console.log("Nouveau message reçu !", req.body);
+    res.sendStatus(200);
+});
+
