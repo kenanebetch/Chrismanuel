@@ -31,8 +31,6 @@ app.post('/', (req, res) => {
   res.status(200).end();
 });
 
-// Start the server
-app.listen// 1. Route pour la vérification de Meta (GET)
 app.get('/webhook', (req, res) => {
     // Cette partie répond à Meta pour dire "Oui, c'est bien mon serveur"
     const mode = req.query['hub.mode'];
@@ -47,8 +45,7 @@ app.get('/webhook', (req, res) => {
     }
 });
 
-// 2. Route pour recevoir les messages (POST)
-// C'est ici que vous traiterez les futurs messages de vos projets (ex: Compta-Vite)
+// C'est ici que vous traiterez les futurs messages de vos projets
 app.post('/webhook', (req, res) => {
     console.log("Nouveau message reçu !", req.body);
     res.sendStatus(200);
