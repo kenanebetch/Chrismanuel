@@ -53,4 +53,8 @@ app.post('/webhook', (req, res) => {
     console.log("Nouveau message reçu !", req.body);
     res.sendStatus(200);
 });
+// Start the server
+app.listen(port, () => {
+  console.log(`\nListening on port ${port}\n`);
+});
 
